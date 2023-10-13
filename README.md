@@ -18,4 +18,4 @@ If you would like to contribute, please read [contribution guide](CONTRIBUTING.m
 
 ## License
 
-This project is licensed under the [License](LICENSE).
+This project is licensed under the [MIT License](LICENSE).
