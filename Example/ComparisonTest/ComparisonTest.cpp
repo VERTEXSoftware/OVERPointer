@@ -16,6 +16,7 @@ public:
 
 int main(int argc, char** argv)
 {
+
 	char* text = "Hello world";
 	int num = 10;
 	std::vector<float> arr{ 10.0f, 1.2f, 2.5f, 2.2f };
