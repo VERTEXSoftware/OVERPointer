@@ -2,7 +2,7 @@
 ![Пример изображения](logo.png)
 
 # OVER POINTER
-**OVER Pointer** is a lightweight and independent library that provides tools for manipulating a universal pointer.
+**OVER Pointer** is a lightweight and independent library that provides tools for manipulating a universal pointer. What is **OVER Pointer**? It is a universal object capable of storing any pointer and unlike VOID pointer knows what type of pointer is assigned to it, which makes it many times safer than VOID pointer. In addition, it supports comparison and assignment operators.
 
 ## Installation
 
