@@ -12,6 +12,7 @@
 
 
 
+
 class OVERPTR {
 private:
 	void* _ptr;
@@ -22,7 +23,7 @@ public:
 		_ptr = NULL;
 		_type = 0;
 	}
-
+	
 	template <typename T>
 	OVERPTR(const T& pt) {
 		if (pt == nullptr) {
@@ -59,12 +60,19 @@ public:
 
 	bool Compare(const  OVERPTR& pt) {
 		return (_ptr == pt._ptr) && (_type == pt._type);
-	}
-	
+	}	
 
 	void Copy(const  OVERPTR& pt) {
 		_ptr = pt._ptr;
 		_type = pt._type;
+	}
+
+	void* GetRealPTR() {
+		return _ptr;
+	}
+
+	size_t GetTypeHash() {
+		return _type;
 	}
 
 	size_t Size() {
@@ -208,6 +216,14 @@ public:
 		_ptr = pt._ptr;
 		_name = pt._name;
 		_type = pt._type;
+	}
+
+	void* GetRealPTR() {
+		return _ptr;
+	}
+
+	size_t GetTypeHash() {
+		return _type;
 	}
 
 	size_t Size() {
