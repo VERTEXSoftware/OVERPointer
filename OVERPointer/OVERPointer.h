@@ -81,7 +81,7 @@ public:
 	}
 
 	template <typename T>
-	bool ÑomparePTR(const T& pt) {
+	bool ComparePTR(const T& pt) {
 		return (_ptr == pt) && (_type == typeid(T).hash_code());
 	}
 
