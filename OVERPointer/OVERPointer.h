@@ -50,8 +50,8 @@ public:
 	}
 
 	void Print() {
-		std::cout << "ADDRESS:   0x" << std::hex << _ptr << std::endl;
-		std::cout << "HASH_TYPE: 0x" << std::hex << _type << std::endl;
+		std::cout << "ADDRESS:   0x" << std::hex << _ptr << std::dec << std::endl;
+		std::cout << "HASH_TYPE: 0x" << std::hex << _type << std::dec << std::endl;
 	}
 
 	bool IsExist() {
@@ -130,7 +130,7 @@ public:
 
 	template <typename T>
 	void Set(const T& pt) {
-		if (pt == NULL) {
+		if (pt == nullptr) {
 			_ptr = NULL;
 			_type = 0;
 		}
@@ -142,11 +142,11 @@ public:
 
 	template <typename T>
 	T Get() {
-		if (_ptr == NULL || _type != typeid(T).hash_code()) {
-			return NULL;
+		if (_ptr != NULL && _type == typeid(T).hash_code()) {
+			return static_cast<T>(_ptr);
 		}
 		else {
-			return static_cast<T>(_ptr);
+			return NULL;
 		}
 	}
 
@@ -199,8 +199,8 @@ public:
 	}
 
 	void Print() {
-		std::cout << "ADDRESS:   0x" << std::hex << _ptr << std::endl;
-		std::cout << "HASH_TYPE: 0x" << std::hex << _type << std::endl;
+		std::cout << "ADDRESS:   0x" << std::hex << _ptr << std::dec << std::endl;
+		std::cout << "HASH_TYPE: 0x" << std::hex << _type << std::dec << std::endl;
 		std::cout << "NAME_TYPE: " << ((_name==NULL) ? "NULL" : _name) << std::endl;
 	}
 
@@ -289,7 +289,7 @@ public:
 
 	template <typename T>
 	void Set(const T& pt) {
-		if (pt == NULL) {
+		if (pt == nullptr) {
 			_ptr = NULL;
 			_name = NULL;
 			_type = 0;
@@ -302,11 +302,11 @@ public:
 
 	template <typename T>
 	T Get() {
-		if (_ptr == NULL || _type != typeid(T).hash_code()) {
-			return NULL;
+		if (_ptr != NULL && _type == typeid(T).hash_code()) {
+			return static_cast<T>(_ptr);
 		}
 		else {
-			return static_cast<T>(_ptr);
+			return NULL;
 		}
 	}
 
