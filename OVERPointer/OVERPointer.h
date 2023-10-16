@@ -109,6 +109,10 @@ public:
 		return (_ptr != pt._ptr) || (_type != pt._type);
 	}
 
+	void* operator*() {
+		return _ptr;
+	}
+
 	template <typename T>
 	void Delete() {
 		if (_ptr != NULL && _type == typeid(T).hash_code()) {
@@ -261,6 +265,10 @@ public:
 
 	bool operator!=(const OVERPTRFULL& pt) const {
 		return (_ptr != pt._ptr) || (_type != pt._type);
+	}
+
+	void* operator*() {
+		return _ptr;
 	}
 
 	template <typename T>
