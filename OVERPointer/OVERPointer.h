@@ -114,12 +114,14 @@ public:
 	}
 
 	template <typename T>
-	void Delete() {
+	bool Delete() {
 		if (_ptr != NULL && _type == typeid(T).hash_code()) {
 			delete static_cast<T>(_ptr);
 			_ptr = NULL;
 			_type = 0;
+			return true;
 		}
+		return false;
 	}
 
 	template <typename T>
