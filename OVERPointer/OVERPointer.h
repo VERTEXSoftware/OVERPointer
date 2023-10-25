@@ -146,7 +146,7 @@ public:
 			return static_cast<T>(_ptr);
 		}
 		else {
-			return NULL;
+			return nullptr;
 		}
 	}
 
@@ -306,7 +306,7 @@ public:
 			return static_cast<T>(_ptr);
 		}
 		else {
-			return NULL;
+			return nullptr;
 		}
 	}
 
