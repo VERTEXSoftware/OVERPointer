@@ -1,16 +1,33 @@
 // https://github.com/VERTEXSoftware/OVERPointer
-// Copyright (C) 2023 VERTEX Software by Sleptsov Vladimir
+// Copyright (C) 2024 VERTEX Software by Sleptsov Vladimir
 // SPDX-License-Identifier: MIT
-
+// Version: 2.1.0-Release
+//
+//    /$$$$$$  /$$    /$$ /$$$$$$$$ /$$$$$$$  /$$$$$$$           /$$             /$$                        
+//   /$$__  $$| $$   | $$| $$_____/| $$__  $$| $$__  $$         |__/            | $$                        
+//  | $$  \ $$| $$   | $$| $$      | $$  \ $$| $$  \ $$ /$$$$$$  /$$ /$$$$$$$  /$$$$$$    /$$$$$$   /$$$$$$ 
+//  | $$  | $$|  $$ / $$/| $$$$$   | $$$$$$$/| $$$$$$$//$$__  $$| $$| $$__  $$|_  $$_/   /$$__  $$ /$$__  $$
+//  | $$  | $$ \  $$ $$/ | $$__/   | $$__  $$| $$____/| $$  \ $$| $$| $$  \ $$  | $$    | $$$$$$$$| $$  \__/
+//  | $$  | $$  \  $$$/  | $$      | $$  \ $$| $$     | $$  | $$| $$| $$  | $$  | $$ /$$| $$_____/| $$      
+//  |  $$$$$$/   \  $/   | $$$$$$$$| $$  | $$| $$     |  $$$$$$/| $$| $$  | $$  |  $$$$/|  $$$$$$$| $$      
+//   \______/     \_/    |________/|__/  |__/|__/      \______/ |__/|__/  |__/   \___/   \_______/|__/      
+//                                                                                                 
 
 #pragma once
 
 #include <iostream>
-#include <fstream>
 #include <cstdio>
 #include <cstdlib>
 
+#define OVERPTR_VER_MAJOR 2
+#define OVERPTR_VER_MINOR 1
+#define OVERPTR_VER_BUGFIX 0
 
+#define OVERPTR_VER ((OVERPTR_VER_MAJOR<<24) + (OVERPTR_VER_MINOR<<16) + (OVERPTR_VER_BUGFIX<<8) + 0)
+
+#define OVERPTR_SIZE sizeof(OVERPTR)
+#define OVERPTR_SIZE_ADDRESS sizeof(size_t)
+#define OVERPTR_MAX_ADDRESS (size_t)-1
 
 
 class OVERPTR {
@@ -26,7 +43,7 @@ public:
 	
 	template <typename T>
 	OVERPTR(const T& pt) {
-		if (pt == nullptr) {
+		if (pt == NULL) {
 			_ptr = NULL;
 			_type = 0;
 		}
@@ -56,6 +73,14 @@ public:
 
 	bool IsExist() {
 		return (_ptr != NULL) && (_type != 0);
+	}
+
+	bool IsNULL() {
+		return (_ptr == NULL) || (_type == 0);
+	}
+
+	bool IsCorrect() {
+		return ((_ptr != NULL) && (_type != 0)||(_ptr == NULL) && (_type == 0));
 	}
 
 	bool Compare(const  OVERPTR& pt) {
@@ -132,7 +157,7 @@ public:
 
 	template <typename T>
 	void Set(const T& pt) {
-		if (pt == nullptr) {
+		if (pt == NULL) {
 			_ptr = NULL;
 			_type = 0;
 		}
@@ -147,16 +172,39 @@ public:
 		if (_ptr != NULL && _type == typeid(T).hash_code()) {
 			return static_cast<T>(_ptr);
 		}
+		return NULL;
+	}
+
+	template <typename Func>
+	void SetFunc(Func&& f) {
+
+		if (pt == NULL) {
+			_ptr = NULL;
+			_type = 0;
+		}
 		else {
-			return nullptr;
+			_ptr = reinterpret_cast<void*>(std::addressof(f));
+			_type = typeid(std::addressof(f)).hash_code();
 		}
 	}
 
+	template <typename Func, typename... Args>
+	int ExeFunc(Args&&... args) {
+
+		if (_ptr != NULL) {
+			auto f = reinterpret_cast<Func>(_ptr);
+			f(std::forward<Args>(args)...);
+
+			return 0;
+		}
+		return 1;
+
+	}
 
 };
 
 
-
+//OVERPTRFULL in developing
 
 class OVERPTRFULL {
 private:
@@ -245,7 +293,7 @@ public:
 
 	template <typename T>
 	OVERPTRFULL& operator=(const T& pt) {
-		if (pt == nullptr) {
+		if (pt == NULL) {
 			_ptr = NULL;
 			_name = NULL;
 			_type = 0;
@@ -291,7 +339,7 @@ public:
 
 	template <typename T>
 	void Set(const T& pt) {
-		if (pt == nullptr) {
+		if (pt == NULL) {
 			_ptr = NULL;
 			_name = NULL;
 			_type = 0;
@@ -307,10 +355,10 @@ public:
 		if (_ptr != NULL && _type == typeid(T).hash_code()) {
 			return static_cast<T>(_ptr);
 		}
-		else {
-			return nullptr;
-		}
+
+		return NULL;
 	}
+
 
 
 };

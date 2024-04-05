@@ -20,4 +20,4 @@ If you would like to contribute, please read [contribution guide](CONTRIBUTING.m
 
 This project is licensed under the [MIT License](LICENSE).
 
-Copyright (c) 2023 VERTEX Software by Sleptsov Vladimir
+Copyright (c) 2024 VERTEX Software by Sleptsov Vladimir
