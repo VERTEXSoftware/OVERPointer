@@ -51,7 +51,7 @@ public:
 			this->Copy(pt);
 		}
 		else {
-			_ptr = static_cast<void*>(pt);
+			_ptr = (void*)(pt);
 			_type = typeid(pt).hash_code();
 		}
 	}
@@ -120,7 +120,7 @@ public:
 			this->Copy(pt);
 		}
 		else {
-			_ptr = static_cast<void*>(pt);
+			_ptr = (void*)(pt);
 			_type = typeid(pt).hash_code();
 		}
 		return *this;
@@ -141,7 +141,7 @@ public:
 	template <typename T>
 	bool Delete() {
 		if (_ptr != NULL && _type == typeid(T).hash_code()) {
-			delete static_cast<T>(_ptr);
+			delete (T)(_ptr);
 			_ptr = NULL;
 			_type = 0;
 			return true;
@@ -162,7 +162,7 @@ public:
 			_type = 0;
 		}
 		else {
-			_ptr = static_cast<void*>(pt);
+			_ptr = (void*)(pt);
 			_type = typeid(pt).hash_code();
 		}
 	}
@@ -170,7 +170,7 @@ public:
 	template <typename T>
 	T Get() {
 		if (_ptr != NULL && _type == typeid(T).hash_code()) {
-			return static_cast<T>(_ptr);
+			return (T)(_ptr);
 		}
 		return NULL;
 	}
@@ -230,7 +230,7 @@ public:
 			this->Copy(pt);
 		}
 		else {
-			_ptr = static_cast<void*>(pt);
+			_ptr = (void*)(pt);
 			_name = typeid(pt).name();
 			_type = typeid(pt).hash_code();
 		}
@@ -302,7 +302,7 @@ public:
 			this->Copy(pt);
 		}
 		else {
-			_ptr = static_cast<void*>(pt);
+			_ptr = (void*)(pt);
 			_name = typeid(pt).name();
 			_type = typeid(pt).hash_code();
 		}
@@ -324,7 +324,7 @@ public:
 	template <typename T>
 	void Delete() {
 		if (_ptr != NULL && _type == typeid(T).hash_code()) {
-			delete static_cast<T>(_ptr);
+			delete (T)(_ptr);
 			_ptr = NULL;
 			_name = NULL;
 			_type = 0;
@@ -345,7 +345,7 @@ public:
 			_type = 0;
 		}
 		else {
-			_ptr = static_cast<void*>(pt);
+			_ptr = (void*)(pt);
 			_type = typeid(pt).hash_code();
 		}
 	}
@@ -353,7 +353,7 @@ public:
 	template <typename T>
 	T Get() {
 		if (_ptr != NULL && _type == typeid(T).hash_code()) {
-			return static_cast<T>(_ptr);
+			return (T)(_ptr);
 		}
 
 		return NULL;
